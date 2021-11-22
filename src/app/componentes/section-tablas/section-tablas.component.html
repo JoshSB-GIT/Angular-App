@@ -1,0 +1,718 @@
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Paciente</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Odontologo</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Consulta</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="factura-tab" data-bs-toggle="tab" data-bs-target="#factura" type="button" role="tab" aria-controls="factura" aria-selected="false">Factura</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tratamientos-tab" data-bs-toggle="tab" data-bs-target="#tratamientos" type="button" role="tab" aria-controls="tratamientos" aria-selected="false">Tratamientos</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active bg-light shadow" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="container pt-3">
+                    <h1 class="fw-bold mb-4" style="color: #e34822;">Pacientes registrados</h1>
+                </div>
+                <div class="col-12 mb-3">
+                    <form [formGroup]="formPaci">
+                        <!-- TABLA PACIENTE -->
+                        <div class="col-12 " id="div-paciente" >
+                            <!-- formulario -->
+                            <div class="col-12 my-0 " id="tabla-paci2">                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input formControlName="paciId" type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="paci_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="paci_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="paci_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input formControlName="paci_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="paci_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="paci_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-around">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <button (click)="insertaPac(formPaci.value)" class="btn btn-success col-12">
+                                                        Crear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 p-1">
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <button class="btn btn-primary col-12" id="btn_consultar_todo_paciente">
+                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button (click)="modificaPac(formPaci.value)" class="btn btn-warning col-12">
+                                            <i class="bi bi-funnel"></i> Editar 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-12 text-center">
+            
+                    <div class="table table-responsive">
+                        <table class="table table-bordered border-warning bg-light shadow" style="border-radius: 20px;"
+                            id="tb-precios">
+                            <thead>
+                                <tr>
+                                    <td>Identificación</td>
+                                    <td>Nombre</td>
+                                    <td>Apellido</td>
+                                    <td>Edad</td>
+                                    <td>Telefono</td>
+                                    <td>Direccion</td>
+                                    <td>Correo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr *ngFor="let art of lista_paciente">
+                                    <td>{{art.cc}}</td>
+                                    <td>{{art.nombre}}</td>
+                                    <td>{{art.apellido}}</td>
+                                    <td>{{art.edad}}</td>
+                                    <td>{{art.direccion}}</td>
+                                    <td>{{art.telefono}}</td>
+                                    <td>{{art.correo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarPac(art)" class="col-6 btn btn-outline-primary me-1">Seleccionar</a>
+                                        <a (click)="eliminarPac(art.id)" class="col-5 btn btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="tab-pane fade bg-light shadow" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="container pt-3">
+                    <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Odontologos registrados</h1>
+                </div>
+                <div class="col-12 mb-3">
+                    <form [formGroup]="formOdon">
+                        <!-- TABLA ODONTOLOGO -->
+                        <div class="col-12 " id="div-odontologo" >
+                            <!-- formulario -->
+                            <div class="col-12 my-0 " id="tabla-odon">                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input required type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"formControlName="odon_id">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="odon_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="odon_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="odon_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input formControlName="odon_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="odon_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <input formControlName="odon_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-around">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <button (click)="insertaOdo(formOdon.value)" type="submit" class="btn btn-success col-12" id="btn-crear-odontologo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                                    </svg> Crear</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 p-1">
+                                <div class="row">
+    
+                                    <div class="col-6">
+                                        <button class="btn btn-primary col-12" id="btn_consultar_todo_odontologo">
+                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button (click)="modificaOdo(formOdon.value)" class="btn btn-warning col-12" id="btn_filtro_odontologo" >
+                                            <i class="bi bi-funnel"></i> Editar 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+            
+                    <div class="table table-responsive">
+                        <table class="table table-bordered border-warning bg-light shadow" style="border-radius: 20px;"
+                            id="tb-precios">
+                            <thead>
+                                <tr>
+                                    <td>Identificacion</td>
+                                    <td>Nombre</td>
+                                    <td>Apellido</td>
+                                    <td>Edad</td>
+                                    <td>Telefono</td>
+                                    <td>Direccion</td>
+                                    <td>correo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr *ngFor="let art of tOdontologo">
+                                    <td>{{art.cc}}</td>
+                                    <td>{{art.nombre}}</td>
+                                    <td>{{art.apellido}}</td>
+                                    <td>{{art.edad}}</td>
+                                    <td>{{art.telefono}}</td>
+                                    <td>{{art.direccion}}</td>
+                                    <td>{{art.correo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarOdon(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarOdon(art.id)" class="btn btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="tab-pane fade bg-light shadow" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="container pt-3">
+                    <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Consultas registradas</h1>
+                </div>
+                <div class="col-12 mb-3">
+                    <form [formGroup]="formConsulta">
+                        <!-- <input type="hidden" formControlName="con_paciId_o">
+                        <input type="hidden" formControlName="con_odonId_o"> -->
+                        <!-- TABLA CONSULTA -->
+                        <div class="col-12" id="div-consulta" >
+                            <!-- formulario -->
+                            <div class="col-12 my-0 " id="tabla-consulta">                                
+                                    <div class="row">
+                                        <div class="col-6">
+                                            
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="con_fecha" type="date" class="form-control" placeholder="Fecha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="con_select_paciente" class="form-select" required>
+                                                        <option value="0" selected>Seleccione el paciente</option>
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.cc}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="con_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.cc}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="con_descripcion" type="text" class="form-control" placeholder="Descripcion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="con_odonId" type="text" class="form-control" placeholder="identificacion odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="con_paciId" type="text" class="form-control" placeholder="identificacion paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="row d-flex justify-content-around">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <button (click)="insertaCon(formConsulta.value)" type="submit" class="btn btn-success col-12" id="btn-crear-consulta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                                        </svg> Crear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <div class="col-6 p-1">
+                                <div class="row">    
+                                    <div class="col-6">
+                                        <button class="btn btn-primary col-12">
+                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button (click)="modificaCon(formConsulta.value)" class="btn btn-warning col-12">
+                                            <i class="bi bi-funnel"></i> Editar 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+            
+                    <div class="table table-responsive">
+                        <table class="table table-bordered border-warning bg-light shadow" style="border-radius: 20px;"
+                            id="tb-precios">
+                            <thead>
+                                <tr>
+                                    <td>fecha</td>
+                                    <td>Descripcion</td>
+                                    <td>CC paciente</td>
+                                    <td>CC Odontologo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr *ngFor="let art of tConsulta">
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.descripcion}}</td>
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fechaHora}}</td>
+                                    <td>{{art.estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarCon(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarCon(art.id)" class="btn btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="tab-pane fade bg-light shadow" id="factura" role="tabpanel" aria-labelledby="factura-tab">
+                <div class="container pt-3">
+                    <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Facturas registradas</h1>
+                </div>
+                <div class="col-12 mb-3">
+                    <form [formGroup]="formFactura">
+                        <!-- TABLA factura -->
+                        <div class="col-12 mb-3" id="div-factura" >
+                            <!-- formulario -->
+                            <div class="col-12 my-0 " id="tabla-paci2">
+                                    <div class="row">
+                                        <!-- <div class="col-6">                                            
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" formControlName="fac_paciId" placeholder="ID Paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-6">   
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el paciente</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_paciente" class="form-select" required>
+                                                        <!-- <option value="0" selected></option> -->
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.nombre}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" formControlName="fac_odoid" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el odontologo</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.nombre}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione la descripcion de la factura</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_consulta" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tConsulta" value="{{art.id}}">{{art.descripcion}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" formControlName="fac_conId" placeholder="ID Consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="row d-flex justify-content-around">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <button (click)="insertaFac(formFactura.value)" type="submit" class="btn btn-success col-12" id="btn-crear-factura"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                                        </svg> Crear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-6 p-1">
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <button class="btn btn-primary col-12" id="btn_consultar_todo_factura">
+                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button (click)="modificaFac(formFactura.value)" class="btn btn-warning col-12">
+                                            <i class="bi bi-funnel"></i> Editar 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+            
+                    <div class="table table-responsive">
+                        <table class="table table-bordered border-warning bg-light shadow" style="border-radius: 20px;"
+                            id="tb-precios">
+                            <thead>
+                                <tr>
+                                    <td>Idn. paciente</td>
+                                    <td>Idn. odontologo</td>
+                                    <td>Fecha Registro</td>
+                                    <!-- <td>Descripcion</td>  -->
+                                    <td>Estado</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr *ngFor="let art of tFactura">
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <!-- <td>{{art.descripcion}}</td>  -->
+                                    <td>{{art.estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarFac(art)" class="btn btn-outline-primary col-5">Seleccionar</a>
+                                        <a (click)="eliminarFac(art.id)" class="btn btn-outline-danger col-5">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="tab-pane fade bg-light shadow" id="tratamientos" role="tabpanel" aria-labelledby="tratamientos-tab">
+                <div class="container pt-3">
+                    <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Tratamientos registrados</h1>
+                </div>
+                <div class="col-12">
+                    <form [formGroup]="formtratamiento" >
+                         <!-- TABLA TRATAMIENTO -->
+                        <div class="col-12 mb-3" id="div-tratamiento" >
+                            <!-- formulario -->
+                            <div class="col-12 my-0 ">
+                                    <div class="row">
+                                        <div class="col-6 text-center">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_tipo" type="text" class="form-control" placeholder="Tipo de tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el paciente</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="tra_select_paciente" class="form-select" required>
+                                                        <!-- <option value="0" selected></option> -->
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.nombre}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_paciId" type="text" class="form-control" placeholder="ID paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-12 p-1">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button class="btn btn-primary col-12" id="btn_consultar_tratamiento">
+                                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button (click)="modificaTra(formtratamiento.value)" class="btn btn-warning col-12">
+                                                            <i class="bi bi-funnel"></i> Editar 
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_descri" type="text" class="form-control" placeholder="Descripción" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_precio" type="text" class="form-control" placeholder="Precio" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione la descripcion de la consulta</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="tra_select_consulta" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tConsulta" value="{{art.id}}">{{art.descripcion}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_odonId" type="text" class="form-control" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el odontologo</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="tra_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.nombre}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-around">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <button (click)="insertaTrara(formtratamiento.value)" type="submit" class="btn btn-success col-12" id="btn-crear-tratamiento"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                                        </svg> Crear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+            
+                    <div class="table table-responsive">
+                        <table class="table table-bordered border-warning bg-light shadow" style="border-radius: 20px;"
+                            id="tb-precios">
+                            <thead>
+                                <tr>
+                                    <td>Tipo Tratamiento</td>
+                                    <td>Descripcion</td>
+                                    <td>Precio</td>
+                                    <td>Idn. Paciente</td>
+                                    <td>Idn. Odontologo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr *ngFor="let art of tTrataminto">
+                                    <td>{{art.tipoTratamiento}}</td>
+                                    <td>{{art.descripcion}}</td>
+                                    <td>{{art.precio}}</td>
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarTra(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarTra(art.id)" class="btn btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                </div>
+            </div>
+      </div>
+</div>
